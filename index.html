@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMINA | คู่มือช่างบริการระบบปรับอากาศ</title>
+<style>
+:root{
+  --navy:#071525;
+  --navy2:#0b2036;
+  --blue:#1687d9;
+  --cyan:#54d7ff;
+  --ice:#dff7ff;
+  --white:#f7fbff;
+  --muted:#9eb4c8;
+  --card:#102a42;
+  --line:rgba(132,213,255,.16);
+  --success:#58e0b1;
+  --warning:#ffd166;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",sans-serif;
+  background:linear-gradient(145deg,#06111e,#0a2035 55%,#06111e);
+  color:var(--white); line-height:1.7;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+  background:radial-gradient(circle at 80% 10%,rgba(84,215,255,.13),transparent 28%),
+             radial-gradient(circle at 10% 80%,rgba(22,135,217,.12),transparent 30%);
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(1120px,92%);margin:auto}
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(5,17,30,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.25rem;font-weight:900;letter-spacing:.16em;color:var(--cyan)}
+.navlinks{display:flex;gap:18px;font-size:.9rem;color:var(--muted)}
+.navlinks a:hover{color:var(--cyan)}
+.hero{padding:82px 0 55px;position:relative}
+.badge{
+  display:inline-flex;padding:7px 13px;border:1px solid rgba(84,215,255,.3);
+  border-radius:999px;color:var(--cyan);background:rgba(84,215,255,.06);font-size:.85rem
+}
+h1{font-size:clamp(2.1rem,6vw,4.5rem);line-height:1.08;margin:20px 0 18px}
+h1 span{color:var(--cyan)}
+.lead{max-width:720px;color:var(--muted);font-size:1.05rem}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;
+  background:var(--blue);color:white
+}
+.btn.secondary{background:transparent;border:1px solid var(--line);color:var(--ice)}
+.grid{display:grid;gap:18px}
+.stats{grid-template-columns:repeat(4,1fr);margin:25px 0 65px}
+.card{
+  background:linear-gradient(145deg,rgba(16,42,66,.96),rgba(8,27,44,.96));
+  border:1px solid var(--line);border-radius:18px;padding:22px;
+  box-shadow:0 18px 50px rgba(0,0,0,.18)
+}
+.stat strong{display:block;font-size:1.8rem;color:var(--cyan)}
+.stat small{color:var(--muted)}
+section{padding:34px 0}
+.section-title{font-size:1.9rem;margin:0 0 8px}
+.section-sub{color:var(--muted);margin-top:0}
+.manual-grid{grid-template-columns:repeat(3,1fr)}
+.manual-card h3{margin-top:5px;color:var(--ice)}
+.icon{
+  width:44px;height:44px;border-radius:13px;display:grid;place-items:center;
+  background:rgba(84,215,255,.1);font-size:1.35rem
+}
+.steps{counter-reset:step}
+.step{display:flex;gap:16px;margin:16px 0}
+.step:before{
+  counter-increment:step;content:counter(step);
+  min-width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:var(--blue);font-weight:900
+}
+.notice{border-left:4px solid var(--warning);background:rgba(255,209,102,.06)}
+.safe{border-left:4px solid var(--success);background:rgba(88,224,177,.05)}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{
+  padding:12px 14px;border:1px solid var(--line);border-radius:12px;
+  background:rgba(255,255,255,.025)
+}
+.check:before{content:"✓";color:var(--success);font-weight:900;margin-right:8px}
+.search{
+  width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);
+  background:#071a2b;color:white;outline:none;margin:15px 0 22px;font-size:1rem
+}
+details{
+  background:rgba(10,31,50,.85);border:1px solid var(--line);border-radius:14px;
+  padding:15px 18px;margin:10px 0
+}
+summary{cursor:pointer;font-weight:800;color:var(--ice)}
+footer{padding:45px 0;color:var(--muted);text-align:center;border-top:1px solid var(--line);margin-top:40px}
+@media(max-width:800px){
+  .navlinks{display:none}
+  .stats,.manual-grid,.checklist{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .stats,.manual-grid,.checklist{grid-template-columns:1fr}
+  .hero{padding-top:55px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#">LUMINA</a>
+    <nav class="navlinks">
+      <a href="#overview">ภาพรวม</a>
+      <a href="#workflow">ขั้นตอนงาน</a>
+      <a href="#safety">ความปลอดภัย</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container">
+    <span class="badge">❄ คู่มือปฏิบัติงานช่างบริการ</span>
+    <h1>คู่มือช่าง <span>LUMINA</span><br>สำหรับงานแอร์และระบบทำความเย็น</h1>
+    <p class="lead">
+      คู่มือฉบับเว็บสำหรับทีมช่างบริการ ออกแบบจากโครงสร้างของ LUMINA Electric Air
+      ซึ่งมีหน้าหลักสำหรับติดตามงาน สมาชิกทีม คะแนนสะสม โบนัส การติดต่อแอดมิน
+      และข้อมูลโปรไฟล์ช่าง
+    </p>
+    <div class="hero-actions">
+      <a class="btn" href="#workflow">เริ่มดูขั้นตอนการทำงาน</a>
+      <a class="btn secondary" href="#safety">ดูข้อกำหนดความปลอดภัย</a>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+<div class="container">
+  <h2 class="section-title">ภาพรวมระบบช่าง</h2>
+  <p class="section-sub">ใช้หน้าแดชบอร์ดเป็นศูนย์กลางก่อนเริ่มและหลังจบงาน</p>
+  <div class="grid stats">
+    <div class="card stat"><strong>งาน</strong><small>ตรวจสอบงานที่ได้รับและสถานะงาน</small></div>
+    <div class="card stat"><strong>ทีม</strong><small>ดูสมาชิกและบทบาทของทีมช่าง</small></div>
+    <div class="card stat"><strong>แต้ม</strong><small>ตรวจสอบคะแนนสะสมและสิทธิประโยชน์</small></div>
+    <div class="card stat"><strong>แอดมิน</strong><small>ติดต่อผ่านช่องทางประสานงานกลาง</small></div>
+  </div>
+
+  <div class="grid manual-grid">
+    <article class="card manual-card">
+      <div class="icon">🧰</div>
+      <h3>1. ตรวจสอบงาน</h3>
+      <p>เปิดหน้าหลัก ตรวจสอบรายการงานถัดไป สถานะการบริการ และข้อมูลที่ได้รับจากแอดมินก่อนออกปฏิบัติงาน</p>
+    </article>
+    <article class="card manual-card">
+      <div class="icon">👷</div>
+      <h3>2. ตรวจสอบทีม</h3>
+      <p>ตรวจสอบชื่อ ตำแหน่ง ความเชี่ยวชาญ และบทบาทของสมาชิก เพื่อแบ่งหน้าที่ให้เหมาะสมกับงาน</p>
+    </article>
+    <article class="card manual-card">
+      <div class="icon">🏆</div>
+      <h3>3. ตรวจสอบคะแนน</h3>
+      <p>ติดตามแต้มสะสม จำนวนงาน รีวิว และสิทธิประโยชน์จากระบบโบนัสของทีม</p>
+    </article>
+  </div>
+</div>
+</section>
+
+<section id="workflow">
+<div class="container">
+  <h2 class="section-title">ขั้นตอนการปฏิบัติงาน</h2>
+  <p class="section-sub">แนวทางมาตรฐานสำหรับช่างก่อน ระหว่าง และหลังเข้าหน้างาน</p>
+  <div class="card">
+    <div class="steps">
+      <div class="step"><div><b>รับงานจากแอดมิน</b><br><span style="color:var(--muted)">ตรวจสอบรายละเอียดงาน สถานที่ เวลา และอุปกรณ์ที่ต้องใช้</span></div></div>
+      <div class="step"><div><b>เตรียมอุปกรณ์</b><br><span style="color:var(--muted)">เตรียมเครื่องมือช่าง อุปกรณ์วัด และอุปกรณ์ป้องกันส่วนบุคคลให้ครบ</span></div></div>
+      <div class="step"><div><b>ตรวจสอบระบบ</b><br><span style="color:var(--muted)">ตรวจสภาพภายนอก ระบบไฟฟ้า การทำงานของเครื่อง และอาการเสียที่แจ้งมา</span></div></div>
+      <div class="step"><div><b>ดำเนินการซ่อม/บำรุงรักษา</b><br><span style="color:var(--muted)">ทำงานตามขั้นตอนของรุ่นเครื่องและมาตรฐานความปลอดภัย ห้ามข้ามขั้นตอนตัดแหล่งจ่ายไฟ</span></div></div>
+      <div class="step"><div><b>ทดสอบหลังงาน</b><br><span style="color:var(--muted)">ตรวจการทำงาน ความผิดปกติ เสียง การระบายความร้อน และความเรียบร้อยของพื้นที่</span></div></div>
+      <div class="step"><div><b>รายงานผลผ่านแอดมิน</b><br><span style="color:var(--muted)">สรุปสิ่งที่ดำเนินการ อะไหล่ที่ใช้ และสถานะงานผ่านช่องทางกลาง</span></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="safety">
+<div class="container">
+  <h2 class="section-title">ความปลอดภัย</h2>
+  <p class="section-sub">ต้องตรวจสอบความปลอดภัยก่อนเริ่มงานทุกครั้ง</p>
+  <div class="card safe">
+    <h3>กฎพื้นฐาน</h3>
+    <div class="checklist">
+      <div class="check">ตัดไฟและตรวจยืนยันก่อนทำงานไฟฟ้า</div>
+      <div class="check">สวม PPE ที่เหมาะสมกับงาน</div>
+      <div class="check">ตรวจเครื่องมือให้อยู่ในสภาพพร้อมใช้</div>
+      <div class="check">ระวังงานบนที่สูงและพื้นเปียก</div>
+      <div class="check">ไม่แก้ไขระบบเกินขอบเขตโดยไม่ได้รับอนุมัติ</div>
+      <div class="check">หากพบความเสี่ยง ให้หยุดงานและแจ้งแอดมิน/หัวหน้าทีม</div>
+    </div>
+  </div>
+  <div class="card notice" style="margin-top:18px">
+    <h3>การติดต่อกับลูกค้า</h3>
+    <p>ตามข้อกำหนดที่แสดงในระบบ LUMINA การสื่อสารกับลูกค้าต้องผ่านฝ่ายประสานงานกลาง และไม่ควรติดต่อโดยตรงนอกกระบวนการที่กำหนด</p>
+  </div>
+</div>
+</section>
+
+<section id="faq">
+<div class="container">
+  <h2 class="section-title">คำถามที่พบบ่อย</h2>
+  <input class="search" id="search" placeholder="ค้นหาคู่มือ เช่น งาน, แอดมิน, ความปลอดภัย, คะแนน...">
+  <div id="faqs">
+    <details><summary>ถ้าข้อมูลหน้างานไม่ครบต้องทำอย่างไร?</summary><p>หยุดการออกงานในส่วนที่ยังขาดข้อมูล และติดต่อแอดมินผ่านช่องทางกลางเพื่อยืนยันรายละเอียด</p></details>
+    <details><summary>ถ้าอุปกรณ์ไม่พร้อมใช้งาน?</summary><p>แจ้งหัวหน้าทีมหรือแอดมินก่อนเริ่มงาน และบันทึกอุปกรณ์ที่จำเป็นเพื่อป้องกันการทำงานที่ไม่ปลอดภัย</p></details>
+    <details><summary>หลังซ่อมเสร็จต้องตรวจอะไร?</summary><p>ทดสอบการทำงาน ตรวจความเรียบร้อยของระบบและพื้นที่ แล้วรายงานผลการปฏิบัติงานตามขั้นตอนของทีม</p></details>
+    <details><summary>คะแนนสะสมใช้ทำอะไร?</summary><p>ระบบตัวอย่างในเว็บไซต์มีรายการแลกสิทธิประโยชน์ เช่น ส่วนลดและโบนัส โดยจำนวนแต้มที่ใช้ขึ้นอยู่กับรายการที่กำหนดในระบบ</p></details>
+  </div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="container">LUMINA Electric Air · คู่มือช่างบริการ · Cold Air / Clean Work / Safe Service</div>
+</footer>
+
+<script>
+const input=document.getElementById('search');
+const items=[...document.querySelectorAll('#faqs details')];
+input.addEventListener('input',()=>{
+  const q=input.value.toLowerCase().trim();
+  items.forEach(i=>i.style.display=i.innerText.toLowerCase().includes(q)?'block':'none');
+});
+</script>
+</body>
+</html>
